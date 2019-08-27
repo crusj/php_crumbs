@@ -5,7 +5,7 @@
 
 * CallWithFileLock    利用文件锁,并发防止争抢`callWithFileLock(mixed $class, string $method, array $param, string $FileLockName):mixed`
 * Camel2Snake         字符串小驼峰转下划线   `camel2Snake($string $camel):string`
-* pageParams          字符串小驼峰转下划线   `pageParams(string $pageName = 'page', string $pageSizeName = 'page_size', int $defaultPageSize = 10): array`
+* pageParams          获取分页参数   `pageParams(string $pageName = 'page', string $pageSizeName = 'page_size', int $defaultPageSize = 10): array`
 
 
 ## class
