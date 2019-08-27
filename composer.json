@@ -1,0 +1,21 @@
+{
+  "name": "crusj/php_crumbs",
+  "description": "php crumbs include class and trait",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "crusj",
+      "email": "296769589@qq.com"
+    }
+  ],
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  },
+  "require": {
+    "php": ">=7.2"
+  },
+  "minimum-stability": "dev"
+}
