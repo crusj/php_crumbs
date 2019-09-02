@@ -1,6 +1,6 @@
 <?php
 
-namespace php_crumbs\traits;
+namespace crusj\php_crumbs\traits;
 
 /**
  * 字符串驼峰转下划线,常用与变量名

@@ -4,7 +4,7 @@
  * date       2019/8/27 上午10:22
  */
 
-namespace php_crumbs\traits;
+namespace crusj\php_crumbs\traits;
 
 /**
  * 获取分页接口分页参数

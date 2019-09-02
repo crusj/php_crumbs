@@ -10,7 +10,7 @@
  * @author jianglong
  */
 
-namespace php_crumbs\traits;
+namespace crusj\php_crumbs\traits;
 
 trait CallWithFileLock
 {
