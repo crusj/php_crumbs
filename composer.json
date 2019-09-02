@@ -16,8 +16,8 @@
   },
   "autoload": {
     "psr-4": {
-      "crusj\\php_crumbs\\classes": "./classes",
-      "crusj\\php_crumbs\\traits": "./traits"
+      "crusj\\php_crumbs\\classes\\": "./classes",
+      "crusj\\php_crumbs\\traits\\": "./traits"
     }
   },
   "require": {
