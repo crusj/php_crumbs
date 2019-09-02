@@ -4,7 +4,7 @@
  * date       2019/8/27 上午10:50
  */
 
-namespace php_crumbs\classes;
+namespace crusj\php_crumbs;
 
 
 /**
