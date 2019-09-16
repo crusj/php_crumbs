@@ -56,6 +56,7 @@ class EmbedToImage
 
         $textOffsetX = ($width - $textWidth) / 2;
         imagettftext($dstImage, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
+        imagesavealph($dstImage);
         imagepng($dstImage, $dstImageName);
         return true;
     }
@@ -109,6 +110,7 @@ class EmbedToImage
         $sourceImageHeight = imagesy($sourceImage);
         imagecopyresampled($dstImage, $sourceImage, 0, 0, 0, 0, $sourceImageWidth, $sourceImageHeight, $sourceImageWidth, $sourceImageHeight);
         imagecopymerge($dstImage, $scaleEmbedImage, $offsetX, $offsetY, 0, 0, imagesx($scaleEmbedImage), imagesy($scaleEmbedImage), 100);
+        imagesavealph($dstImage);
         imagepng($dstImage, $dstImageName);
         return true;
     }
@@ -136,6 +138,7 @@ class EmbedToImage
 
         $fontColor = imagecolorclosestalpha($dstImage, $fontColor[0], $fontColor[1], $fontColor[2], $fontAlpha);
         imagettftext($dstImage, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
+        imagesavealph($dstImage);
         imagepng($dstImage, $dstImageName);
         return true;
     }
