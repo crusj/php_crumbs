@@ -41,10 +41,10 @@ class EmbedToImage
 
         switch ($sourceImage['mime']) {
             case 'image/jpeg':
-                $dstImage = imagecreatefromjpeg($sourceImage);
+                $dstImage = imagecreatefromjpeg($sourceImageName);
                 break;
             case 'image/png':
-                $dstImage = imagecreatefrompng($sourceImage);
+                $dstImage = imagecreatefrompng($sourceImageName);
                 break;
             default:
                 return false;
