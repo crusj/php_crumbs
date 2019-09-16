@@ -85,10 +85,10 @@ class EmbedToImage
         $sourceImageProperty = getimagesize($sourceImageName);
         switch ($sourceImageProperty['mime']) {
             case 'image/jpeg':
-                $sourceImage = imagecreatefromjpeg($embedImageName);
+                $sourceImage = imagecreatefromjpeg($sourceImageName);
                 break;
             case 'image/png':
-                $sourceImage = imagecreatefrompng($embedImageName);
+                $sourceImage = imagecreatefrompng($sourceImageName);
                 break;
             default:
                 return false;
