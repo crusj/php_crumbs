@@ -108,8 +108,35 @@ class EmbedToImage
         $sourceImageWidth = imagesx($sourceImage);
         $sourceImageHeight = imagesy($sourceImage);
         imagecopyresampled($dstImage, $sourceImage, 0, 0, 0, 0, $sourceImageWidth, $sourceImageHeight, $sourceImageWidth, $sourceImageHeight);
-        imagecopymerge($dstImage, $scaleEmbedImage,$offsetX,$offsetY,0,0,imagesx($scaleEmbedImage),imagesy($scaleEmbedImage),100);
-        imagepng($dstImage,$dstImageName);
+        imagecopymerge($dstImage, $scaleEmbedImage, $offsetX, $offsetY, 0, 0, imagesx($scaleEmbedImage), imagesy($scaleEmbedImage), 100);
+        imagepng($dstImage, $dstImageName);
+        return true;
+    }
+
+    public function embedText(string $text, int $textOffsetX, int $textOffsetY,
+                              string $sourceImageName, string $dstImageName,
+                              int $fontSize, string $fontPath,
+                              array $fontColor = [255, 255, 255], float $fontAlpha = 0
+    ): bool
+    {
+        if (!is_file($sourceImageName)) {
+            return false;
+        }
+        $sourceImage = getimagesize($sourceImageName);
+        switch ($sourceImage['mime']) {
+            case 'image/jpeg':
+                $dstImage = imagecreatefromjpeg($sourceImageName);
+                break;
+            case 'image/png':
+                $dstImage = imagecreatefrompng($sourceImageName);
+                break;
+            default:
+                return false;
+        }
+
+        $fontColor = imagecolorclosestalpha($dstImage, $fontColor[0], $fontColor[1], $fontColor[2], $fontAlpha);
+        imagettftext($dstImage, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
+        imagepng($dstImage, $dstImageName);
         return true;
     }
 }
