@@ -1,4 +1,3 @@
-<?php
 /**
  * author     jianglong
  * date       2019/8/27 上午10:50
@@ -50,14 +49,22 @@ class EmbedToImage
                 return false;
         }
 
+        $x = imagesx($dstImage);
+        $y = imagesy($dstImage);
+
+        $img = imagecreatetruecolor($x, $y);
+        $alpha = imagecolorallocatealpha($img, 0, 0, 0, 127);
+        imagefill($img, 0, 0, $alpha);
+        imagecopyresampled($img, $dstImage, 0, 0, 0, 0, $x, $y, $x, $y);
+
         $textProperty = imagettfbbox($fontSize, 0, $fontPath, $text);
         $textWidth = $textProperty[2] - $textProperty[0];
         $fontColor = imagecolorclosestalpha($dstImage, $fontColor[0], $fontColor[1], $fontColor[2], $fontAlpha);
-
         $textOffsetX = ($width - $textWidth) / 2;
-        imagettftext($dstImage, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
-        imagesavealph($dstImage);
-        imagepng($dstImage, $dstImageName);
+
+        imagettftext($img, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
+        imagesavealpha($img, true);
+        imagepng($img, $dstImageName);
         return true;
     }
 
@@ -103,14 +110,15 @@ class EmbedToImage
 
         //创建被嵌入图片的画布
         $dstImage = imagecreatetruecolor(imagesx($sourceImage), imagesy($sourceImage));
-        $color = imagecolorallocate($dstImage, 255, 255, 255);
+        $color = imagecolorallocatealpha($dstImage, 0, 0, 0, 127);
         imagefill($dstImage, 0, 0, $color);
 
         $sourceImageWidth = imagesx($sourceImage);
         $sourceImageHeight = imagesy($sourceImage);
+
         imagecopyresampled($dstImage, $sourceImage, 0, 0, 0, 0, $sourceImageWidth, $sourceImageHeight, $sourceImageWidth, $sourceImageHeight);
         imagecopymerge($dstImage, $scaleEmbedImage, $offsetX, $offsetY, 0, 0, imagesx($scaleEmbedImage), imagesy($scaleEmbedImage), 100);
-        imagesavealph($dstImage);
+        imagesavealpha($dstImage, true);
         imagepng($dstImage, $dstImageName);
         return true;
     }
@@ -135,11 +143,49 @@ class EmbedToImage
             default:
                 return false;
         }
+        $x = imagesx($dstImage);
+        $y = imagesy($dstImage);
 
-        $fontColor = imagecolorclosestalpha($dstImage, $fontColor[0], $fontColor[1], $fontColor[2], $fontAlpha);
-        imagettftext($dstImage, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
-        imagesavealph($dstImage);
-        imagepng($dstImage, $dstImageName);
+        $img = imagecreatetruecolor($x, $y);
+        $alpha = imagecolorallocatealpha($img, 0, 0, 0, 127);
+        imagefill($img, 0, 0, $alpha);
+        imagecopyresampled($img, $dstImage, 0, 0, 0, 0, $x, $y, $x, $y);
+
+        $fontColor = imagecolorclosestalpha($img, $fontColor[0], $fontColor[1], $fontColor[2], $fontAlpha);
+        imagettftext($img, $fontSize, 0, $textOffsetX, $textOffsetY, $fontColor, $fontPath, $text);
+        imagesavealpha($img, true);
+
+        imagepng($img, $dstImageName);
         return true;
+    }
+    //线条
+    public function imageLine($sourceImageName, $dst, $x1, $y1, $x2, $y2, array $fontColor)
+    {
+        if (!is_file($sourceImageName)) {
+            return false;
+        }
+        $sourceImage = getimagesize($sourceImageName);
+        switch ($sourceImage['mime']) {
+            case 'image/jpeg':
+                $dstImage = imagecreatefromjpeg($sourceImageName);
+                break;
+            case 'image/png':
+                $dstImage = imagecreatefrompng($sourceImageName);
+                break;
+            default:
+                return false;
+        }
+        $x = imagesx($dstImage);
+        $y = imagesy($dstImage);
+
+        $img = imagecreatetruecolor($x, $y);
+        $alpha = imagecolorallocatealpha($img, 0, 0, 0, 127);
+        imagefill($img, 0, 0, $alpha);
+        imagecopyresampled($img, $dstImage, 0, 0, 0, 0, $x, $y, $x, $y);
+
+        $fontColor = imagecolorclosestalpha($img, $fontColor[0], $fontColor[1], $fontColor[2], $fontColor[3]);
+        imageline($img, $x1, $y1, $x2, $y2, $fontColor);
+        imagesavealpha($img, true);
+        imagepng($img, $dst);
     }
 }
