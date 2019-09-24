@@ -107,6 +107,10 @@ class EmbedToImage
 
         //嵌入图片按照嵌入尺寸进行缩放
         $scaleEmbedImage = imagecreatetruecolor($embedX, $embedY);
+        $color = imagecolorallocate($scaleEmbedImage, 255, 255, 255);
+        imagecolortransparent($scaleEmbedImage, $color);
+        imagefill($scaleEmbedImage, 0, 0, $color);
+
         list($embedImageWidth, $embedImageHeight) = getimagesize($embedImageName);
         imagecopyresampled($scaleEmbedImage, $embedImage, 0, 0, 0, 0, $embedX, $embedY, $embedImageWidth, $embedImageHeight);
 
