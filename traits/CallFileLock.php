@@ -20,7 +20,15 @@ trait CallWithFileLock
      */
     protected $fileLockDir = '../runtime/lock';
 
-    public function callWithFileLock($class, $method, $param, $lockFileName)
+    /**
+     * 调取方法使用文件锁
+     * @param $class 类实例
+     * @param string $method 类实例方法
+     * @param array $param 类实例方法参数
+     * @param string $lockFileName 文件锁名称，不同场景的锁名字不要重复
+     * @return mixed|null
+     */
+    public function callWithFileLock($class, string $method, array $param, string $lockFileName)
     {
         if (!is_dir($this->fileLockDir)) {
             mkdir($this->fileLockDir, 0777, true);

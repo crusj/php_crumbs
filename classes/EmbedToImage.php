@@ -18,15 +18,15 @@ namespace crusj\php_crumbs\classes;
 class EmbedToImage
 {
     /**
-     * 向图片嵌入文字
-     * @param int $textOffsetY
-     * @param string $sourceImageName
-     * @param string $dstImageName 文件存储路径
-     * @param string $text
-     * @param int $fontSize
-     * @param string $fontPath
-     * @param array $fontColor
-     * @param float $fontAlpha
+     * 向图片嵌入居中文字
+     * @param int $textOffsetY Y轴偏移量
+     * @param string $sourceImageName 被嵌入原图片路径
+     * @param string $dstImageName 嵌入后图片路径
+     * @param string $text 嵌入文字
+     * @param int $fontSize 嵌入文字大小
+     * @param string $fontPath 嵌入文字字体
+     * @param array $fontColor 嵌入文字字体颜色
+     * @param float $fontAlpha 嵌入文字字体alpha
      * @return bool
      * @author jianglong
      */
@@ -70,6 +70,17 @@ class EmbedToImage
         return true;
     }
 
+    /**
+     * 嵌入图片
+     * @param string $embedImageName 嵌入的图片路径
+     * @param string $sourceImageName 被嵌入的原图片路径
+     * @param string $dstImageName 嵌入后生成的图片路径
+     * @param int $embedX 嵌入图片的宽
+     * @param int $embedY 嵌入图片的高
+     * @param int $offsetX 嵌入图片的X轴偏移
+     * @param int $offsetY 嵌入图片的Y轴便宜
+     * @return bool
+     */
     public function embedImage(string $embedImageName, string $sourceImageName, string $dstImageName,
                                int $embedX, int $embedY,
                                int $offsetX, int $offsetY
@@ -129,6 +140,19 @@ class EmbedToImage
         return true;
     }
 
+    /**
+     * 嵌入文字
+     * @param string $text 需要嵌入的文字
+     * @param int $textOffsetX 嵌入文字的X轴偏移量
+     * @param int $textOffsetY 嵌入文字的Y轴偏移量
+     * @param string $sourceImageName 被嵌入的原图片路径
+     * @param string $dstImageName 被嵌入后的图片路径
+     * @param int $fontSize 嵌入字体大小
+     * @param string $fontPath 嵌入字体路径
+     * @param array $fontColor 字体颜色rgb
+     * @param float $fontAlpha 字体颜色alpha
+     * @return bool
+     */
     public function embedText(string $text, int $textOffsetX, int $textOffsetY,
                               string $sourceImageName, string $dstImageName,
                               int $fontSize, string $fontPath,
@@ -164,8 +188,29 @@ class EmbedToImage
         imagepng($img, $dstImageName);
         return true;
     }
-    //线条
-    public function imageLine($sourceImageName, $dst, $x1, $y1, $x2, $y2, array $fontColor)
+
+    /**
+     * @param $sourceImageName 原图片地址
+     * @param $dst
+     * @param $x1
+     * @param $y1
+     * @param $x2
+     * @param $y2
+     * @param array $fontColor
+     * @return bool
+     */
+    /**
+     * 向图片嵌入线条
+     * @param string $sourceImageName 原图片地址
+     * @param string $dst 嵌入图片后的地址
+     * @param int $x1 线条直线起点x轴坐标
+     * @param int $y1 线条直线起点y轴坐标
+     * @param int $x2 线条直线终点x轴坐标
+     * @param int $y2 线条直线终点y轴坐标
+     * @param array $fontColor 线条颜色rgba
+     * @return bool
+     */
+    public function imageLine(string $sourceImageName, string $dst, int $x1, int $y1,int $x2,int $y2, array $fontColor): bool
     {
         if (!is_file($sourceImageName)) {
             return false;
@@ -193,5 +238,6 @@ class EmbedToImage
         imageline($img, $x1, $y1, $x2, $y2, $fontColor);
         imagesavealpha($img, true);
         imagepng($img, $dst);
+        return true;
     }
 }

@@ -15,3 +15,11 @@
 * EmbedToImage 向图片嵌入文字或图片 gd库编译需要(jpeg,freetype)
 * FailResponse,SuccessResponse,Response,ResponseException,用来处理接口返回，只需要抛出SuccessResponse,和FailResponse,继承Response拓展异常类
 
+
+## changelog
+
+### 2020-01-11
+
+* ParseDate 增加时间格式或时间戳转化为几分钟前、几小时前、几个月前的方法
+* 更新相关的注释信息
+

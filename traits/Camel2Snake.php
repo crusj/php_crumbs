@@ -10,6 +10,11 @@ namespace crusj\php_crumbs\traits;
  */
 trait Camel2Snake
 {
+    /**
+     * 驼峰转下划线
+     * @param string $camel
+     * @return string
+     */
     public function camel2Snake(string $camel): string
     {
         return strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $camel));
