@@ -6,6 +6,7 @@
 * CallWithFileLock 利用文件锁,并发防止争抢`callWithFileLock(mixed $class, string $method, array $param, string $FileLockName):mixed`
 * Camel2Snake 字符串小驼峰转下划线   `camel2Snake($string $camel):string`
 * Page 获取分页参数,以及配合laravel的分页类实现数据表的分页，支持字段过滤和别名
+* ReadableFileSize 字节转化为易读大小
 
 
 ## class
@@ -22,4 +23,5 @@
 
 * ParseDate 增加时间格式或时间戳转化为几分钟前、几小时前、几个月前的方法
 * 更新相关的注释信息
+* 增加traits将byte转化为可读的大小
 
