@@ -72,7 +72,8 @@ class ObjectFactory
     private static function parseDocMethod(string $doc, string $namespace)
     {
         $find = '@method';
-        $docs = explode(PHP_EOL, $doc);
+        $doc = str_replace(["\r", "\n", "\r\n"], "\r\n", $doc);
+        $docs = explode("\r\n", $doc);
         foreach ($docs as $line) {
             $position = strpos($line, $find);
             if ($position !== false) {
